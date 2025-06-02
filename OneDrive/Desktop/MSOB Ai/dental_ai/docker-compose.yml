@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    depends_on:
+      - ollama
+    container_name: dental_ai_app
+
+  ollama:
+    image: ollama/ollama
+    platform: linux/amd64
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    container_name: ollama_server
+
+volumes:
+  ollama_data:
+
